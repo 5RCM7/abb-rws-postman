@@ -1,0 +1,1702 @@
+{
+	"info": {
+		"_postman_id": "b09c3362-7cc6-4d4d-bafe-54c12c8b2939",
+		"name": "ABB Robot Web Services— XHTML v2.0 (OmniCore/IRC5)",
+		"description": "StartFragment\n\n# Collection Postman — ABB Robot Web Services (RWS) — Profil XHTML v2.0\n\n**Cible par défaut :**  \n`{{baseUrl}}` (ex. `https://127.0.0.1:55`)\n\n---\n\n### Authentification\n\n- **Type :** HTTP Digest\n    \n- **Configuration :** identifiants renseignés au niveau de la collection\n    \n- Certains appels nécessitent une session **RMMP (Modify)** ou un **mastership** actif avant toute écriture.\n    \n\n---\n\n### En-têtes globaux\n\n```\nAccept: application/xhtml+xml;v=2.0\nContent-Type: application/x-www-form-urlencoded;v=2.0   ← requis pour POST/PUT\n\n ```\n\n---\n\n### Format de réponse\n\n- Pas d’utilisation de `?json=1`\n    \n- Les réponses sont renvoyées au format **XHTML**, plus fiable selon les firmwares.\n    \n\n---\n\n### Astuces d’utilisation\n\n- **Jog flow :**\n    \n    1. Login local (si nécessaire)\n        \n    2. `POST /users/rmmp?action=request` (Modify)\n        \n    3. `GET /rw/motionsystem?resource=change-count`\n        \n    4. `POST /rw/motionsystem?action=jog` avec le même `ccount`\n        \n- **Erreur 406 (Not Acceptable) :**\n    \n    - Vérifier `Accept: application/xhtml+xml;v=2.0`\n        \n    - Vérifier que l’authentification Digest est active\n        \n- **Mastership obligatoire** pour les opérations suivantes :\n    \n    - RAPID (symbols, execution, modules)\n        \n    - I/O (set-value)\n        \n    - Motion (jog, move, etc.)\n        \n\nEndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47792044",
+		"_collection_link": "https://youssef-aatar95-6351811.postman.co/workspace/0c2ef4b2-f47b-4092-82cc-fad5b86ace1e/collection/47792044-b09c3362-7cc6-4d4d-bafe-54c12c8b2939?action=share&source=collection_link&creator=47792044"
+	},
+	"item": [
+		{
+			"name": "00 – System & Controller",
+			"item": [
+				{
+					"name": "Index des services",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Version système",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/system",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"system"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liste utilisateurs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users?action=show",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "show"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mode opératoire (panel)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/panel/opmode",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"panel",
+								"opmode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "État contrôleur",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/ctrlstate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"ctrlstate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost/rw/panel/opmode",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Default User",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "robotics",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "opmode=auto",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost/rw/panel/opmode",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"rw",
+								"panel",
+								"opmode"
+							]
+						},
+						"description": "Generated from cURL: curl -u \"Default User\":robotics -H \"Content-Type: application/x-www-form-urlencoded;v=2.0\" -d \"opmode=auto\" -X POST \"https://localhost/rw/panel/opmode\""
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "10 – Users & Privileges",
+			"item": [
+				{
+					"name": "Login local (set-local)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users?action=set-local",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "set-local"
+								}
+							]
+						},
+						"description": "Effectue un login local côté contrôleur (selon config)."
+					},
+					"response": []
+				},
+				{
+					"name": "RMMP: request Modify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "privilege",
+									"value": "modify",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/rmmp?action=request",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"rmmp"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "request"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RMMP: cancel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/rmmp?action=cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"rmmp"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "cancel"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost/users/rmmp",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Default User",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "robotics",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "https://localhost/users/rmmp",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"users",
+								"rmmp"
+							]
+						},
+						"description": "Generated from cURL: curl -u \"Default User\":robotics -H \"accept: application/xhtml+xml;v=2.0\" \"https://localhost/users/rmmp\""
+					},
+					"response": []
+				},
+				{
+					"name": "Mastership: request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "domain",
+									"value": "{{domain}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/mastership?action=request",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"mastership"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "request"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mastership: release",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "domain",
+									"value": "{{domain}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/mastership?action=release",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"mastership"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "release"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "15 – Subscriptions",
+			"item": [
+				{
+					"name": "Créer subscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "resources",
+									"value": "{{resources}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/subscription",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscription"
+							]
+						},
+						"description": "resources = liste séparée par ;"
+					},
+					"response": []
+				},
+				{
+					"name": "Lire subscription",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/subscription/{{subid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscription",
+								"{{subid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer subscription",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/subscription/{{subid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscription",
+								"{{subid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "20 – Motion System (Jog flow)",
+			"item": [
+				{
+					"name": "Change-count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Extraire la valeur du <lvalue> dans la réponse XHTML\r",
+									"let match = pm.response.text().match(/<span class=\"lvalue\">(\\d+)<\\/span>/);\r",
+									"\r",
+									"if (match) {\r",
+									"    let ccountValue = match[1];\r",
+									"    // Met à jour la variable au niveau de la collection\r",
+									"    pm.collectionVariables.set(\"ccount\", ccountValue);\r",
+									"    console.log(\"✅ ccount mis à jour :\", ccountValue);\r",
+									"} else {\r",
+									"    console.log(\"⚠️ Impossible d’extraire la valeur du change-count.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "robotics",
+									"type": "string"
+								},
+								{
+									"key": "undefined",
+									"type": "any"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/motionsystem?resource=change-count",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"motionsystem"
+							],
+							"query": [
+								{
+									"key": "resource",
+									"value": "change-count"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jog (avec ccount)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ccount",
+									"value": "{{ccount}}",
+									"type": "text"
+								},
+								{
+									"key": "coordinate",
+									"value": "tool",
+									"type": "text"
+								},
+								{
+									"key": "x",
+									"value": "{{dx}}",
+									"type": "text"
+								},
+								{
+									"key": "y",
+									"value": "{{dy}}",
+									"type": "text"
+								},
+								{
+									"key": "z",
+									"value": "{{dz}}",
+									"type": "text"
+								},
+								{
+									"key": "rx",
+									"value": "{{rx}}",
+									"type": "text"
+								},
+								{
+									"key": "ry",
+									"value": "{{ry}}",
+									"type": "text"
+								},
+								{
+									"key": "rz",
+									"value": "{{rz}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/motionsystem?action=jog",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"motionsystem"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "jog"
+								}
+							]
+						},
+						"description": "Exécuter un jog en coordonnées outil. Reprendre le ccount de la dernière lecture."
+					},
+					"response": []
+				},
+				{
+					"name": "Jog axe par axe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "axis1=string&axis2=string&axis3=string&axis4=string&axis5=string&axis6=string&ccount=string&inc-mode=string",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://127.0.0.1/rw/motionsystem/jog",
+							"protocol": "https",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"rw",
+								"motionsystem",
+								"jog"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://127.0.0.1/rw/motionsystem/jog' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/x-www-form-urlencoded;v=2.0' \\\r\n  -d 'axis1=string&axis2=string&axis3=string&axis4=string&axis5=string&axis6=string&ccount=string&inc-mode=string'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "30 – IO System",
+			"item": [
+				{
+					"name": "Lister signaux",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/iosystem/signals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"iosystem",
+								"signals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lire signal",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/iosystem/signals/{{signal}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"iosystem",
+								"signals",
+								"{{signal}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set DO (set-value)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "value",
+									"value": "{{value}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/iosystem/signals/{{network}}/{{device}}/{{signal}}/set-value",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"iosystem",
+								"signals",
+								"{{network}}",
+								"{{device}}",
+								"{{signal}}",
+								"set-value"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "40 – RAPID Program Control",
+			"item": [
+				{
+					"name": "Start",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/execution?action=start",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"execution"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "start"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/execution?action=stop",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"execution"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "stop"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset PP to Main",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/execution?action=resetpp",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"execution"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "resetpp"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modules: load",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "task",
+									"value": "{{task}}",
+									"type": "text"
+								},
+								{
+									"key": "module",
+									"value": "{{module}}",
+									"type": "text"
+								},
+								{
+									"key": "path",
+									"value": "{{path}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/modules?action=load",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"modules"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "load"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modules: unload",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "task",
+									"value": "{{task}}",
+									"type": "text"
+								},
+								{
+									"key": "module",
+									"value": "{{module}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/modules?action=unload",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"modules"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "unload"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lister modules",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/modules",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"modules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lister tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/tasks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "45 – RAPID Symbol Data (XHTML)",
+			"item": [
+				{
+					"name": "Lire variable",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/symbol/data/RAPID/{{task}}/{{module}}/{{var}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"symbol",
+								"data",
+								"RAPID",
+								"{{task}}",
+								"{{module}}",
+								"{{var}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Écrire variable",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "value",
+									"value": "{{value}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/rapid/symbol/data/RAPID/{{task}}/{{module}}/{{var}}?action=set",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"rapid",
+								"symbol",
+								"data",
+								"RAPID",
+								"{{task}}",
+								"{{module}}",
+								"{{var}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "set"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "50 – File Service",
+			"item": [
+				{
+					"name": "Racine File Service",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/fileservice",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fileservice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lister dossier",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/fileservice/{{path}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fileservice",
+								"{{path}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload fichier",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "",
+									"description": "Choisir un fichier à téléverser",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/fileservice/{{path}}?action=upload",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fileservice",
+								"{{path}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "upload"
+								}
+							]
+						},
+						"description": "Transfert de fichier via File Service."
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer fichier/dossier",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/fileservice/{{path}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fileservice",
+								"{{path}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Renommer fichier/dossier",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "{{newname}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/fileservice/{{path}}?action=rename",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fileservice",
+								"{{path}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "rename"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "55 – DIPC",
+			"item": [
+				{
+					"name": "Lister canaux",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/dipc/channels",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"dipc",
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Envoyer message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded;v=2.0"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "message",
+									"value": "Hello from Postman",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rw/dipc/{{channel}}?action=send",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"dipc",
+								"{{channel}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "send"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lire messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xhtml+xml;v=2.0"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/rw/dipc/{{channel}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rw",
+								"dipc",
+								"{{channel}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auto ou MAN",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Default User",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "robotics",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/xhtml+xml;v=2.0"
+					}
+				],
+				"url": {
+					"raw": "https://localhost/rw/panel/opmode",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rw",
+						"panel",
+						"opmode"
+					]
+				},
+				"description": "Generated from cURL: curl -u \"Default User\":robotics -H \"accept: application/xhtml+xml;v=2.0\" \"https://localhost/rw/panel/opmode\""
+			},
+			"response": []
+		},
+		{
+			"name": "Chagement Auto/Man",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded;v=2.0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "opmode=string",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://127.0.0.1/rw/panel/opmode",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"rw",
+						"panel",
+						"opmode"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://127.0.0.1/rw/panel/opmode' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/x-www-form-urlencoded;v=2.0' \\\r\n  -d 'opmode=string'"
+			},
+			"response": []
+		},
+		{
+			"name": "Motor on",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/ctrl/panel/ctrlstate?action=setmotorson",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ctrl",
+						"panel",
+						"ctrlstate"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "setmotorson"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "digest",
+		"digest": [
+			{
+				"key": "password",
+				"value": "robotics",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "algorithm",
+				"value": "MD5",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://127.0.0.1:55"
+		},
+		{
+			"key": "username",
+			"value": "robot"
+		},
+		{
+			"key": "password",
+			"value": "robot"
+		},
+		{
+			"key": "domain",
+			"value": "rapid"
+		},
+		{
+			"key": "task",
+			"value": "T_ROB1"
+		},
+		{
+			"key": "module",
+			"value": "MainModule"
+		},
+		{
+			"key": "var",
+			"value": "myVar"
+		},
+		{
+			"key": "signal",
+			"value": "DO1"
+		},
+		{
+			"key": "network",
+			"value": "Local"
+		},
+		{
+			"key": "device",
+			"value": "0"
+		},
+		{
+			"key": "value",
+			"value": "1"
+		},
+		{
+			"key": "path",
+			"value": "home"
+		},
+		{
+			"key": "newname",
+			"value": "renamed.mod"
+		},
+		{
+			"key": "subid",
+			"value": "1"
+		},
+		{
+			"key": "resources",
+			"value": "/rw/iosystem/signals/Local/0/DO1;state"
+		},
+		{
+			"key": "channel",
+			"value": "chan1"
+		},
+		{
+			"key": "ccount",
+			"value": "0"
+		},
+		{
+			"key": "dx",
+			"value": "0.0"
+		},
+		{
+			"key": "dy",
+			"value": "0.0"
+		},
+		{
+			"key": "dz",
+			"value": "5.0"
+		},
+		{
+			"key": "rx",
+			"value": "0.0"
+		},
+		{
+			"key": "ry",
+			"value": "0.0"
+		},
+		{
+			"key": "rz",
+			"value": "0.0"
+		}
+	]
+}
