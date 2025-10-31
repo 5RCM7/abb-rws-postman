@@ -87,7 +87,7 @@ Example sequence:
 
 ## 📄 License
 
-Released for internal and R&D usage.  
+
 © 2025 — ABB Robotics France — 
 
 ---
