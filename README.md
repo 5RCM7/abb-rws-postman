@@ -1,6 +1,6 @@
 # ABB Robot Web Services — XHTML v2.0 (OmniCore / IRC5)
 
-Official **Postman collection** to interact with **ABB OmniCore** and **IRC5** robot controllers through the **Robot Web Services (RWS)** API — **XHTML v2.0** profile.
+ **Postman collection** to interact with **ABB OmniCore** and **IRC5** robot controllers through the **Robot Web Services (RWS)** API — **XHTML v2.0** profile.
 
 ---
 
